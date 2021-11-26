@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Personas (editar)</title>
+    </head>
+    <body>
+        <h1>Personas</h1>
+        <form action="/editar/{{ data['_id'] }}" method="POST">
+            <label for="nombre">Nombre:</label>
+            <input type="text" name="nombre" id="nombre" value="{{ data['nombre'] }}" /><br>
+            <label for="apellido">Apellido:</label>
+            <input type="text" name="apellido" id="apellido" value="{{ data['apellido'] }}"/><br>
+            <label for="edad">Edad:</label>
+            <input type="text" name="edad" id="edad" value="{{ data['edad'] }}"/><br>
+            <input type="submit" value="Editar" />
+        </form>
+    </body>
+</html>

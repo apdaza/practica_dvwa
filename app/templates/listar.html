@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Personas (listar)</title>
+    </head>
+    <body>
+        <h1>Personas</h1>
+        <table>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Edad</th>
+                <th>Opciones</th>
+            </tr>
+            {% for d in data %}
+            <tr>
+                <td>{{ d.nombre }}</td>
+                <td>{{ d.apellido }}</td>
+                <td>{{ d.edad }}</td>
+                <td>
+                    <a href="/editar/{{ d._id }}">Editar</a>
+                    <a href="/eliminar/{{ d._id }}">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <a href="{{ url_for('agregar') }}">Agregar</a>
+</html>
