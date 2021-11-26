@@ -18,8 +18,8 @@
                 <td>{{ d.apellido }}</td>
                 <td>{{ d.edad }}</td>
                 <td>
-                    <a href="/editar/{{ d._id }}">Editar</a>
-                    <a href="/eliminar/{{ d._id }}">Eliminar</a>
+                    <a href="/{{edit}}/{{ d._id }}">Editar</a>
+                    <a href="/{{delete}}/{{ d._id }}">Eliminar</a>
                 </td>
             </tr>
             {% endfor %}

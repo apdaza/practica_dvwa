@@ -1,12 +1,24 @@
 from flask import Flask, render_template, request, redirect, url_for
+from pymongo.message import delete
 from models.modelo import *
+from models.cifrado import *
 
 app = Flask(__name__)
 
 @app.route('/')
 def listar():
+    edit = cifrar("editar")
+    delete = cifrar("eliminar")
     data = consultar()
-    return render_template('listar.html', data=data)
+    return render_template('listar.html', data=data, edit=edit, delete=delete)
+
+@app.route('/<accion>/<id>')
+def renviar(accion, id):
+    accion = descifrar(accion[2:-1])
+    if accion == "editar":
+        return redirect(url_for('editar', id=id))
+    elif accion == "eliminar":
+        return redirect(url_for('eliminar', id=id))
 
 @app.route('/agregar', methods=['GET', 'POST'])
 def agregar():

@@ -13,7 +13,7 @@ aes = AES.new(clave.encode('utf-8'), AES.MODE_ECB)
 mensaje = 'Hola mundo!'
 mensaje = completar_bloque(mensaje)
 
-cifrado = b2a_hex(aes.encrypt(mensaje.encode('utf-8')))
+cifrado = '511f0124908d89428219723cf27c13af' #b2a_hex(aes.encrypt(mensaje.encode('utf-8')))
 texto_claro = aes.decrypt(a2b_hex(cifrado)).decode('utf-8').rstrip(' ')
 
 print("mensaje cifrado",cifrado)
